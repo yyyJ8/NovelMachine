@@ -1,0 +1,38 @@
+# 题材注册表 —— 定义每个题材的目录、collection 及归类规则
+#
+# 结构说明:
+#   path:                        _bible/ 下的子目录名（摄入时扫描这个目录）
+#   default_collection:          未匹配任何规则时落入的 collection
+#   processed_default_collection: processed/ 子目录内未匹配 file_keywords 时落入的 collection
+#   collections:                 归类规则列表
+#     dir_keywords:              路径包含任一关键词 → 该 collection（目录级，优先）
+#     file_keywords:             路径含 "processed" 且文件名包含任一关键词 → 该 collection
+#
+# 接入自己的资料:
+#   1. 在 _bible/ 下建题材目录（如 _bible/wuxia/），放入 raw 资料
+#   2. 在本文件追加同名题材配置（可只写 path + default_collection，规则后续再细化）
+#   3. 运行: python cli.py ingest --genre wuxia
+#   未注册的题材也能摄入，全部资料落入 {genre}_general 兜底 collection。
+genres:
+  xianxia:
+    path: xianxia
+    default_collection: xianxia_classics
+    processed_default_collection: xianxia_terminology
+    collections:
+      - name: xianxia_classics
+        dir_keywords: ["01-道藏核心", "02-神话仙传", "04-儒释补充", "narrative"]
+      - name: xianxia_cultivation
+        dir_keywords: ["03-术数阵法"]
+        file_keywords: ["修炼"]
+      - name: xianxia_bestiary
+        file_keywords: ["异兽"]
+      - name: xianxia_artifacts
+        file_keywords: ["法宝"]
+      - name: xianxia_herbs
+        file_keywords: ["灵草"]
+      - name: xianxia_characters
+        file_keywords: ["人物"]
+      - name: xianxia_geography
+        file_keywords: ["地理"]
+      - name: xianxia_terminology
+        file_keywords: ["术语"]

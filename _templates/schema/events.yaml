@@ -1,0 +1,27 @@
+# -- 关键事件模板 v1.0 --
+
+meta:
+  last_updated: ""
+  description: ""
+
+events:
+  - id: ""                       # 唯一标识，如 "ch_01_abandon"
+    name: ""                     # 事件名称
+    chapter: 0                   # 所属章节
+    type: ""                     # 剧情推进 | 角色转折 | 伏笔埋设 | 伏笔回收 | 战斗 | 揭示 | 过渡
+    summary: ""                  # 一句话描述
+
+    participants: []             # 参与角色名
+
+    cause: ""                    # 前因（由什么事件/动机触发）
+    consequence: ""              # 后果（对后续剧情的影响）
+
+    foreshadowing_planted: []    # 本事件埋下的伏笔 id
+    foreshadowing_revealed: []   # 本事件回收的伏笔 id
+
+    items_involved: []           # 涉及的法宝/武器/丹药，指向 items.yaml
+    locations: []                # 发生地点，指向 world-structure.yaml
+
+    realm_changes: []            # [{character: "主角", from: "凡人", to: "炼气"}]
+    deaths: []                   # 死亡角色
+    new_characters: []           # 首次出场角色

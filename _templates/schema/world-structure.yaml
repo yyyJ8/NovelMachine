@@ -1,0 +1,71 @@
+# -- 世界观模板 v1.0 --
+
+meta:
+  last_updated: ""
+  description: ""
+
+# -- 世界规则 --
+# 本书特有的天道/世界法则
+world_rules:
+  - name: ""
+    description: ""
+    symptoms: []
+    first_hint: ""
+
+# -- 凡界 --
+mortal_world:
+  overview: ""
+
+  regions:                       # 地理大区
+    - name: ""
+      position: ""
+      description: ""
+
+  powers:                        # 势力区域（国家/城邦/联盟）
+    - name: ""
+      position: ""
+      feature: ""                # 一句话特征
+      power_type: ""             # 宗门割据 | 朝廷集权 | 世家分封 | 佣兵城邦 | 商会联盟
+      crisis: ""                 # 当前核心危机
+      factions: []
+      politics: ""
+      underground: ""
+
+# -- 跨区域势力 --
+cross_border:
+  - name: ""
+    type: ""                     # 商会 | 情报 | 佣兵 | 交通 | 暗网 | 宗教
+    territory: ""
+    description: ""
+
+# -- 关键地点 --
+key_locations:
+  - name: ""
+    type: ""                     # 宗门 | 城池 | 秘境 | 洞天 | 古战场 | 禁地
+    location: ""
+    description: ""
+
+# -- 洞天福地 / 秘境 --
+secret_spaces:
+  grotto_heavens: []             # 十大洞天
+  minor_grotto_heavens: []       # 三十六小洞天
+  ten_continents: []             # 十洲
+  three_islands: []              # 三岛
+  secret_realms:
+    - name: ""
+      type: ""                   # 太古遗迹 | 强者陨落残留 | 空间碎片 | 灵脉结晶
+      description: ""
+      entry_condition: ""
+
+# -- 上界 --
+# 飞升后的世界，如果小说不涉及则删掉此节
+upper_realm:
+  description: ""
+  known: []
+  unknown: []
+
+# -- 分卷解锁 --
+volume_unlock:
+  卷一: ""
+  卷二: ""
+  # 按实际卷数增减

@@ -1,0 +1,57 @@
+# -- 器物模板 v1.1 --
+# 法宝 / 武器 / 丹药 / 符箓 / 灵材 共用
+# made_from: 指向灵材名，used_in: 由灵材反向指向成品
+# 换书时保留结构，清空数据即可
+
+# -- 法宝 --
+artifacts:
+  - name: ""
+    type: ""                   # 攻击 | 防御 | 辅助 | 空间 | 封印
+    rank: ""                   # 凡器 | 灵器 | 宝器 | 道器 | 仙器
+    owner: ""
+    source: ""                 # 来源/出处
+    made_from: []              # 指向 materials 中的灵材名
+    abilities: []
+    limitation: ""             # 限制/代价
+    current_status: ""         # 完好 | 损毁 | 遗失 | 封印中
+    first_appeared: 0
+
+# -- 武器 --
+weapons:
+  - name: ""
+    type: ""                   # 剑 | 刀 | 枪 | 弓 | 暗器 | 其他
+    rank: ""
+    owner: ""
+    made_from: []              # 指向 materials 中的灵材名
+    abilities: []
+    note: ""
+
+# -- 丹药 --
+pills:
+  - name: ""
+    type: ""                   # 修炼 | 疗伤 | 突破 | 延寿 | 毒药 | 特殊
+    rank: ""                   # 凡品 | 灵品 | 宝品 | 道品 | 仙品
+    effect: ""
+    made_from: []              # 指向 materials 中的灵材名
+    side_effect: ""
+    known_by: []               # 谁会炼
+
+# -- 符箓 --
+talismans:
+  - name: ""
+    type: ""                   # 攻击 | 防御 | 遁术 | 通讯 | 封印 | 辅助
+    rank: ""
+    effect: ""
+    made_from: []              # 指向 materials 中的灵材名
+    duration: ""               # 一次性 | 持续X时辰 | 永久
+    known_by: []
+
+# -- 灵材 --
+materials:
+  - name: ""
+    type: ""                   # 矿石 | 灵木 | 兽材 | 灵液 | 晶体 | 其他
+    rank: ""
+    source: ""                 # 产地/来源
+    use: []                    # 炼器 | 炼丹 | 布阵 | 修炼（可多个）
+    used_in: []                # 反向关联：哪些成品用了此灵材
+    rarity: ""                 # 常见 | 稀有 | 绝迹

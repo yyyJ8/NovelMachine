@@ -1,0 +1,19 @@
+# -- 灵兽模板 v1.0 --
+
+meta:
+  last_updated: ""
+  description: ""
+
+beasts:
+  - name: ""
+    type: ""                   # 神兽 | 灵兽 | 妖兽 | 凶兽 | 凡兽
+    rank: ""                   # 凡阶 | 灵阶 | 地阶 | 天阶 | 圣阶 | 神阶
+    species: ""                # 种族
+    appearance: ""
+    abilities: []
+    habitat: ""                # 栖息地
+    contract_owner: ""         # 契约者，无则空
+    relationship: ""           # 和主人的关系：主仆 | 同伴 | 平等 | 寄生
+    intelligence: ""           # 灵智程度：本能 | 开窍 | 通灵 | 化形 | 如人
+    first_appeared: 0
+    note: ""

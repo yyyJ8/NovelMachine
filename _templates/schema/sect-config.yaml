@@ -1,0 +1,60 @@
+# -- 宗门配置模板 v1.0 --
+
+meta:
+  name: ""
+  location: ""
+  scale: ""
+  age: ""
+  type: ""                     # 剑修 | 丹道 | 体修 | 综合 | 阵修 | 御兽 | 傀儡 | 情报 | 商会
+  rank: ""                     # 超级 | 一流 | 二流 | 三流 | 独立
+
+# -- 权力结构 --
+power_structure:
+  leader:                      # 宗主/门主/殿主
+    name: ""
+    title: ""
+    realm: ""
+    trait: ""
+
+  council:                     # 长老会
+    - seat: ""                 # 席位名称
+      role: ""                 # 职责
+      current: ""              # 现任
+      realm: ""
+      note: ""
+
+  peaks:                       # 各峰/各堂
+    - name: ""
+      specialty: ""
+      leader: ""
+      note: ""
+
+# -- 弟子等级 --
+disciple_ranks:
+  - rank: ""
+    count: 0
+    entrance: ""               # 入门条件
+    treatment: ""              # 待遇
+    known: []                  # 已知角色
+
+# -- 功法体系 --
+techniques:
+  main: ""                     # 镇宗功法
+  branches: []                 # 分支功法
+  defect: ""                   # 功法缺陷/副作用
+
+# -- 当前状态 --
+current_state:
+  politics: []                 # 政治局势
+  strength: []                 # 战力评估
+  crisis: []                   # 危机
+  narrative_position: ""       # 叙事定位
+
+# -- 阵法 --
+formations: []                 # 宗门拥有的阵法，指向 formations.yaml
+
+# -- 外部势力 --
+external:
+  allies: []
+  rivals: []
+  neutrals: []

@@ -1,0 +1,47 @@
+# -- 进度追踪模板 v1.0 --
+
+meta:
+  book: ""
+  last_updated: ""
+  total_chapters: 0
+  completed_chapters: 0
+
+# -- 分章状态 --
+chapters:
+  - number: 0
+    status: ""                 # draft | review | final
+    title: ""
+    summary: ""                # 一句话
+    key_events: []
+    characters_appeared: []
+    foreshadowing_planted: []  # 埋下的伏笔
+    foreshadowing_revealed: [] # 回收的伏笔
+    word_count: 0
+
+# -- 角色状态 --
+character_states:
+  - name: ""
+    current_realm: ""          # 当前境界
+    realm_changed_at: []       # [{chapter: 15, from: "凡人", to: "炼气"}]
+    skills_learned: []         # [{chapter: 0, skill: ""}]
+    location: ""               # 当前位置
+    status: ""                 # 正常 | 受伤 | 闭关 | 失踪 | 死亡
+
+# -- 伏笔追踪 --
+# 和 character-schema.story_function.hook 联动：
+#   hook 是伏笔的"声明"（角色身上挂着的谜），foreshadowing 是伏笔的"追踪"（何时埋、何时收）
+foreshadowing:
+  - id: ""
+    hook_ref: ""               # 指向 character-schema 的 hook 标识，无则空
+    description: ""
+    planted_chapter: 0
+    target_chapter: 0          # 计划回收章节
+    revealed_chapter: 0        # 实际回收章节，未回收填 0
+    status: ""                 # open | revealed | abandoned
+
+# -- 灵脉状态 --
+spiritual_veins:
+  - name: ""
+    location: ""
+    status: ""                 # 正常 | 淤堵 | 断裂 | 枯竭
+    first_noted: 0             # 首次出现的章节

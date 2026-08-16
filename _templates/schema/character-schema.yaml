@@ -1,0 +1,89 @@
+# -- 角色配置模板 v1.0 --
+# 所有角色共用此 schema。填完删掉不需要的字段即可。
+
+# -- 基础 --
+name: ""
+role_type: protagonist    # protagonist | heroine | mentor | guardian | antagonist | rival | family | friend | supporting
+aliases: []
+
+# -- 修仙 --
+spiritual_root:
+  type: ""               # 金 | 木 | 水 | 火 | 土 | 变异
+  grade: ""              # 甲等 | 乙等 | 丙等 | 丁等
+
+physique:
+  name: ""               # 特殊体质名称，无则填 null
+  grade: ""
+  description: ""
+  awakened: false
+
+cultivation:
+  realm: ""              # 凡人 | 炼气 | 筑基 | 金丹 | 元婴 | 化神 | 返虚 | 合道
+  sub_stage: ""          # 初期 | 中期 | 后期 | 巅峰 | 圆满
+  notes: ""
+
+techniques:              # 功法
+  - name: ""
+    source: ""
+    type: ""             # 主修 | 辅助 | 禁术
+    notes: ""
+
+skills:                  # 术法/战技
+  - name: ""
+    source: ""
+    mastery: ""          # 入门 | 小成 | 大成 | 圆满
+    notes: ""
+
+# -- 外貌 --
+appearance:
+  age_range: ""
+  build: ""
+  eyes: ""
+  hair: ""
+  notable: ""            # 显著特征
+  extra: ""
+
+# -- 性格 --
+personality:
+  core: ""               # 一句话核心
+  strengths: []
+  weaknesses: []
+  speech_style: ""
+  tags: []               # 给 AI 快速理解的标签，如 ["寡言", "行动派"]
+
+# -- 背景 --
+background:
+  origin: ""             # 出身地
+  birth_event: ""        # 出生特殊事件，无则删
+  key_experiences: []
+  secret: ""             # 角色自己不知道的秘密，无则删
+
+# -- 动机 --
+motivation:
+  phase_1:
+    goal: ""
+    trigger_chapter: 0        # 触发此阶段的事件所在章节
+  phase_2:
+    goal: ""
+    trigger_chapter: 0
+  phase_3:
+    goal: ""
+    trigger_chapter: 0
+
+growth_arc: ""           # 本卷成长轨迹，一句话
+
+# -- 关系 --
+relationships:
+  - target: ""
+    type: ""             # 师徒 | 父子 | 恋人 | 同伴 | 敌对 | 守护 | 复杂
+
+# -- 器物/阵法/灵兽关联 --
+formations: []           # 角色掌握的阵法，指向 formations.yaml
+artifacts: []            # 角色持有的法宝/武器，指向 items.yaml
+beasts: []               # 角色契约/拥有的灵兽，指向 beasts.yaml
+
+# -- 剧情定位 --
+story_function:
+  role: ""               # 在故事里干什么
+  hook: ""               # 悬念/伏笔
+  volume_1_arc: ""       # 卷一中的轨迹
