@@ -80,6 +80,9 @@ python cli.py ingest --genre xianxia --strict
 
 # 增量摄入：只处理新增/变更文件（依据 mtime+size 指纹，大幅省时间）
 python cli.py ingest --genre xianxia --incremental
+
+# 429 限流时降速：调小批大小 + 加大批间延时
+python cli.py ingest --genre xianxia --clear --batch-size 16 --batch-delay 1
 ```
 
 查看索引状态：`python cli.py info`
@@ -107,6 +110,7 @@ python rag_query.py "阵法" --search-only --top-k 10 --rerank 2>NUL
 
 | 问题 | 处理 |
 |------|------|
+| 摄入时报 **429 限流** | 分两层应对：① **自动**——embedder 对 429 做长退避重试（默认最多 10 次、单次最长等 60s，尊重 `Retry-After` 头），限流窗口恢复后自动继续，1 万条最终能全部啃完（只是慢）；② **手动降速**——`--batch-size 16/8`（减单批 token 量）+ `--batch-delay 1~3`（批间 sleep），或在 `.env` 设 `EMBEDDING_BATCH_SIZE` / `EMBEDDING_BATCH_DELAY` / `RATE_LIMIT_MAX_RETRIES` / `RATE_LIMIT_MAX_WAIT` |
 | 摄入后查询无结果 | 检查 `python cli.py info` 的 collection 是否为空；确认资料在 `_bible/{题材}/raw/` 下 |
 | 换 embedding 模型报维度错 | `.env` 里同步改 `EMBEDDING_DIM`，并 `--clear` 重建索引 |
 | 重复摄入产生脏数据 | 用 `--clear` 全量重建；日常新增资料用 `--incremental` 增量摄入 |

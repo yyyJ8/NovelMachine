@@ -22,6 +22,6 @@ events:
     items_involved: []           # 涉及的法宝/武器/丹药，指向 items.yaml
     locations: []                # 发生地点，指向 world-structure.yaml
 
-    realm_changes: []            # [{character: "主角", from: "凡人", to: "炼气"}]
+    realm_changes: []            # [{character: "林尘", from: "凡人", to: "炼气"}]
     deaths: []                   # 死亡角色
     new_characters: []           # 首次出场角色

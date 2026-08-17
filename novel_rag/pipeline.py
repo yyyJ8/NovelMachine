@@ -59,6 +59,8 @@ class IngestionPipeline:
         verbose: bool = True,
         strict: bool = False,
         incremental: bool = False,
+        batch_size: int | None = None,
+        batch_delay: float | None = None,
     ) -> dict:
         """
         执行完整摄入。
@@ -71,6 +73,8 @@ class IngestionPipeline:
             verbose: 打印进度
             strict: 失败即抛异常（默认收集 warnings 继续，不静默）
             incremental: 增量摄入——只处理新增/变更文件（依据 mtime+size 指纹）
+            batch_size: 每批 embedding 条数（默认 config.embedding_batch_size）
+            batch_delay: 批间等待秒数（默认 config.embedding_batch_delay；429 限流时降速）
         返回:
             {"collections": {...}, "total_chunks": int, "elapsed": float,
              "warnings": [str, ...], "skipped": int}  # 增量模式跳过未变文件数
@@ -161,7 +165,11 @@ class IngestionPipeline:
                 print(f"   {col_name}: embedding {len(texts)} 条...")
 
             try:
-                vecs = self.embedder.embed_texts(texts)
+                vecs = self.embedder.embed_texts(
+                    texts,
+                    batch_size=batch_size,
+                    batch_delay=batch_delay,
+                )
             except Exception as e:
                 msg = f"{col_name} embedding 失败: {e}"
                 if strict:

@@ -56,7 +56,12 @@ class Config:
     # ── API 参数 ─────────────────────────────
     max_retries: int = 3
     retry_delay: float = 1.0
-    embedding_batch_size: int = 32
+    embedding_batch_size: int = int(os.getenv("EMBEDDING_BATCH_SIZE", "32"))
+    embedding_batch_delay: float = float(os.getenv("EMBEDDING_BATCH_DELAY", "0"))  # 批间 sleep 秒（限流降速）
+
+    # ── 429 限流专用重试（等 TPM 窗口恢复）────────
+    rate_limit_max_retries: int = int(os.getenv("RATE_LIMIT_MAX_RETRIES", "10"))
+    rate_limit_max_wait: float = float(os.getenv("RATE_LIMIT_MAX_WAIT", "60"))  # 单次最大等待秒
 
     # ── Embedding 维度（bge-m3 输出 1024 维；换模型时同步改 .env）──
     embedding_dim: int = int(os.getenv("EMBEDDING_DIM", "1024"))

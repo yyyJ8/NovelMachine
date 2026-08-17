@@ -38,6 +38,8 @@ def cmd_ingest(
     clear: bool = False,
     strict: bool = False,
     incremental: bool = False,
+    batch_size: int | None = None,
+    batch_delay: float | None = None,
 ):
     """摄入资料到知识库"""
     strategies = {
@@ -58,6 +60,7 @@ def cmd_ingest(
                 result = pipeline.run(
                     genre=g, strategy=chunk_strategy, clear_existing=clear,
                     strict=strict, incremental=incremental,
+                    batch_size=batch_size, batch_delay=batch_delay,
                 )
                 total.update(result["collections"])
             except Exception as e:
@@ -67,6 +70,7 @@ def cmd_ingest(
         result = pipeline.run(
             genre=genre, strategy=chunk_strategy, clear_existing=clear,
             strict=strict, incremental=incremental,
+            batch_size=batch_size, batch_delay=batch_delay,
         )
         _print_ingest_summary(result["collections"])
         _print_ingest_warnings(result.get("warnings", []))
@@ -325,6 +329,10 @@ def main():
                                help="任一环节失败立即报错退出（默认收集 warnings 继续）")
     ingest_parser.add_argument("--incremental", action="store_true",
                                help="增量摄入：只处理新增/变更文件（依据 mtime+size 指纹）")
+    ingest_parser.add_argument("--batch-size", type=int, default=None, dest="embed_batch_size",
+                               help="每批 embedding 条数（默认 32；429 限流时调小到 8~16）")
+    ingest_parser.add_argument("--batch-delay", type=float, default=None,
+                               help="每批 embedding 之间等待秒数（默认 0；限流时调大到 1~3）")
 
     # ── query ─────────────────────────────────
     query_parser = subparsers.add_parser("query", help="查询知识库")
@@ -357,6 +365,8 @@ def main():
             clear=args.clear,
             strict=args.strict,
             incremental=args.incremental,
+            batch_size=args.embed_batch_size,
+            batch_delay=args.batch_delay,
         )
     elif args.command == "query":
         cmd_query(
