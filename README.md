@@ -42,51 +42,42 @@ python rag_query.py "关键词" --search-only --top-k 5
 
 ## 架构
 
-### 1. 系统总览
-
-```mermaid
-flowchart TB
-    subgraph 协作层["协作层 · 你的 AI 会话（Claude / DeepSeek）"]
-        A["主编 Agent<br/>对话式编排 · 刻意不脚本化"]
-    end
-
-    subgraph 编排层["编排层 · 8 个专职 Agent"]
-        B["Writer 写手"]
-        C["Reviewer 审稿"]
-        D["FormatChecker 格式"]
-        E["Inspector 校验 / BetaReader 读者 / WorldBuilder 设定 / Outliner 大纲"]
-    end
-
-    subgraph 基础设施层["基础设施层 · novel_rag/"]
-        F["ChromaDB 语义检索"]
-        G["BM25 关键词检索"]
-        H["RRF 融合 → 结果"]
-        I["config/genres.yaml 题材注册表"]
-    end
-
-    A -- "调度" --> B
-    B --> C
-    B --> D
-    A --> E
-    A -- "检索资料" --> F
-    A -- "检索资料" --> G
-    F --> H
-    G --> H
-    I --> F
-    I --> G
-    B -- "定稿" --> J["novel_state.yaml<br/>状态快照"]
+```
+你的 AI 会话（Claude / DeepSeek）
+     │  读 _agents/ 说明书 + 组装上下文
+     ▼
+主编 Agent（对话式编排 · 刻意不脚本化）
+     │
+     ├── 写作循环 ──────────────────────────┐
+     │   Writer → Reviewer + FormatChecker  │
+     │   → 修改循环（≤3 轮）→ 定稿          │
+     │   → 更新 novel_state.yaml            │
+     └── 周期触发：Inspector / BetaReader / WorldBuilder
+     │
+     ▼ 检索资料
+RAG 框架（novel_rag/）
+     ├── ChromaDB（语义向量）──┐
+     ├── BM25（jieba 关键词）──┼─ RRF 融合 → 结果
+     └── config/genres.yaml ──┘（题材注册表）
 ```
 
-### 2. 单章写作闭环
+---
 
-```
-章纲（7 项评判自检）→ Writer 起草
-  → Reviewer + FormatChecker 并行审稿
-  → 通过 → 定稿 → 微型检查 → 更新 novel_state.yaml
-  → 不通过 → 修改循环（≤3 轮）→ 仍不过 → 标记「需人工介入」
-```
+## 技术栈
 
-### 3. Agent 团队
+| 层级 | 技术 | 说明 |
+|------|------|------|
+| 编排 | AI 会话 + 主编 Agent | 主编在对话中调度 8 个专职 Agent，每步可检查/打断/覆写 |
+| 语义检索 | ChromaDB + BGE-M3 | 向量检索，嵌入走 SiliconFlow OpenAI 兼容 API |
+| 关键词检索 | BM25 + jieba 分词 | 专有名词精确匹配，与语义路 RRF 融合 |
+| 配置 | `config/genres.yaml` | 题材注册表配置驱动，接入新资料无需改代码 |
+| 状态 | `novel_state.yaml` | 角色/伏笔/时间线结构化快照，跨会话不丢 |
+| 摄入 | 增量 + 限流自愈 | mtime 指纹增量；429 长退避重试（尊重 Retry-After） |
+| 依赖 | `requirements.txt` | 单文件依赖清单，`pip install -r requirements.txt` |
+
+---
+
+## Agent 团队（8 个）
 
 | 代号 | Agent | 职责 | 触发时机 |
 |------|-------|------|---------|
@@ -99,17 +90,14 @@ flowchart TB
 | WB | WorldBuilder 设定 | 典籍检索 + 设定建造/矛盾修复 | 开书时 + Writer 标缺时 |
 | OL | Outliner 大纲师 | 大纲/卷纲人机交互规划 | 开书时 + 每卷开始前 |
 
-### 4. 技术栈
+### 单章写作闭环
 
-| 层级 | 技术 | 说明 |
-|------|------|------|
-| 编排 | AI 会话 + 主编 Agent | 主编在对话中调度 8 个专职 Agent，每步可检查/打断/覆写 |
-| 语义检索 | ChromaDB + BGE-M3 | 向量检索，嵌入走 SiliconFlow OpenAI 兼容 API |
-| 关键词检索 | BM25 + jieba 分词 | 专有名词精确匹配，与语义路 RRF 融合 |
-| 配置 | `config/genres.yaml` | 题材注册表配置驱动，接入新资料无需改代码 |
-| 状态 | `novel_state.yaml` | 角色/伏笔/时间线结构化快照，跨会话不丢 |
-| 摄入 | 增量 + 限流自愈 | mtime 指纹增量；429 长退避重试（尊重 Retry-After） |
-| 依赖 | `requirements.txt` | 单文件依赖清单，`pip install -r requirements.txt` |
+```
+章纲（7 项评判自检）→ Writer 起草
+  → Reviewer + FormatChecker 并行审稿
+  → 通过 → 定稿 → 微型检查 → 更新 novel_state.yaml
+  → 不通过 → 修改循环（≤3 轮）→ 仍不过 → 标记「需人工介入」
+```
 
 ---
 
