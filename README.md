@@ -3,6 +3,8 @@
 基于 **多 Agent 编排 + RAG 混合检索** 的中文网文写作框架。
 
 > 自然想法 → 大纲/卷纲/章纲 → 写手起草 → 并行审稿 → 修改循环 → 定稿 → 状态更新，完整写作闭环。
+>
+> 📖 想深入理解代码？看 [PROJECT_WALKTHROUGH.md](docs/PROJECT_WALKTHROUGH.md)（对照源码逐模块讲解）。
 
 [![Python](https://img.shields.io/badge/Python-3.10+-3776AB?logo=python)](https://www.python.org/)
 [![ChromaDB](https://img.shields.io/badge/ChromaDB-0.5+-blue)](https://www.trychroma.com/)
