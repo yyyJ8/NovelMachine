@@ -15,6 +15,38 @@
 
 ## 快速开始
 
+### 方式 A：一键安装（不懂代码也能用）
+
+> Windows 双击 `setup.bat`；macOS/Linux 运行 `bash setup.sh`。
+> 脚本自动完成：创建虚拟环境 → 安装依赖 → 生成 .env 模板。
+
+```bash
+# Windows
+setup.bat
+
+# macOS / Linux
+bash setup.sh
+```
+
+装完后：
+1. 编辑 `.env`，填入你的 `SILICONFLOW_API_KEY`
+2. 把资料放进 `_bible/{题材}/raw/`
+3. 摄入：`python cli.py ingest --genre xianxia`
+4. 查询：`python rag_query.py "关键词" --search-only`
+
+### 方式 B：让 AI 帮你装（推荐给 AI 使用者）
+
+把下面这段**原样复制**发给你的 AI 助手（Claude / DeepSeek / Cursor 等），它会自动完成安装配置：
+
+> 请帮我完成 NovelMachine 项目的初始化和配置：
+> 1. 运行 `setup.bat`（Windows）或 `bash setup.sh`（macOS/Linux）完成环境安装
+> 2. 检查 `.env` 是否存在，缺失则从 `.env.example` 复制并提示我填写 `SILICONFLOW_API_KEY`
+> 3. 告诉我下一步该把资料放到哪个目录、如何摄入
+
+AI 工具用户也可直接阅读 [AGENTS.md](AGENTS.md)（Claude Code / Cursor / Codex / DSH 打开项目会自动加载）。
+
+### 方式 C：手动安装（开发者）
+
 ```bash
 # 1. 装环境
 python -m venv venv
