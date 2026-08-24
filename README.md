@@ -157,8 +157,8 @@ pytest                          # 网络受限时: python tests/manual_smoke.py
 | Phase 1 | Agent 岗位说明书 + 设定体系 | ✅ |
 | Phase 2 | 三层规划（大纲→卷纲→章纲）+ novel_state | ✅ |
 | Phase 3 | 写作闭环 MVP（单章循环跑通） | ✅ |
-| Phase 4 | 多章连续性（10 章连写 + 伏笔提醒） | 🔄 进行中 |
-| Phase 5 | 读者反馈、多题材扩展（武侠/历史/科幻） | ⬜ 规划 |
+| Phase 4 | 多章连续性（10 章连写 + 伏笔提醒） | ✅ |
+| Phase 5 | 读者反馈、多题材扩展（武侠/历史/科幻） | ✅ |
 
 ---
 
