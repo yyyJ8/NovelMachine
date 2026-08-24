@@ -7,7 +7,7 @@
 [![Python](https://img.shields.io/badge/Python-3.10+-3776AB?logo=python)](https://www.python.org/)
 [![ChromaDB](https://img.shields.io/badge/ChromaDB-0.5+-blue)](https://www.trychroma.com/)
 [![BM25](https://img.shields.io/badge/BM25-%E5%85%B3%E9%94%AE%E8%AF%8D%E6%A3%80%E7%B4%A2-orange)](https://github.com/dorianbrown/rank_bm25)
-[![RAG](https://img.shields.io/badge/RAG-%E6%B7%B7%E5%90%88%E6%A3%80%E7%B4%A2-green)](docs/RAG_USAGE.md)
+[![RAG](https://img.shields.io/badge/RAG-%E6%B7%B7%E5%90%88%E6%A3%80%E7%B4%A2-green)](docs/RAG.md)
 [![OpenAI Compatible](https://img.shields.io/badge/API-OpenAI_Compatible-000000?logo=openai)](https://platform.openai.com/docs/api-reference)
 [![License](https://img.shields.io/badge/License-MIT-yellow)](LICENSE)
 
@@ -19,7 +19,7 @@
 # 1. 装环境
 python -m venv venv
 venv/Scripts/activate          # Windows；macOS/Linux: source venv/bin/activate
-pip install -e ".[dev]"
+pip install -r requirements.txt
 
 # 2. 配 .env（填入你自己的 API Key）
 # SILICONFLOW_API_KEY=sk-your-key      # embedding 用
@@ -73,7 +73,7 @@ RAG 框架（novel_rag/）
 | 配置 | `config/genres.yaml` | 题材注册表配置驱动，接入新资料无需改代码 |
 | 状态 | `novel_state.yaml` | 角色/伏笔/时间线结构化快照，跨会话不丢 |
 | 摄入 | 增量 + 限流自愈 | mtime 指纹增量；429 长退避重试（尊重 Retry-After） |
-| 打包 | `pyproject.toml` | `pip install -e`，自带 `rag-query` / `novel-cli` 命令 |
+| 依赖 | `requirements.txt` | 单文件依赖清单，`pip install -r requirements.txt` |
 
 ---
 
@@ -115,11 +115,10 @@ RAG 框架（novel_rag/）
 ├── _templates/                 # 大纲/卷纲/章纲模板 + schema
 ├── _workflows/                 # 校验脚本（verify_punct.py）
 ├── tests/                      # smoke test（pytest + manual_smoke.py）
-├── docs/                       # RAG_USAGE.md 使用指南
+├── docs/                       # RAG.md（设计 + 使用指南）
 ├── config/genres.yaml          # 题材注册表（可编辑）
 ├── cli.py / rag_query.py       # 命令行入口
-├── export_public.ps1           # 私有工作区 → 本仓库导出脚本
-└── _public_templates/          # 公开版 README/CLAUDE/LICENSE/.gitignore
+└── AGENT_REVIEW.md             # Agent 演进记录（评审→优化→落地）
 ```
 
 ---
@@ -141,11 +140,17 @@ RAG 框架（novel_rag/）
 ## 测试
 
 ```bash
-pip install -e ".[dev]"
+pip install -r requirements.txt
 pytest                          # 网络受限时: python tests/manual_smoke.py
 ```
 
 覆盖：题材归类规则、摄入→检索端到端、增量摄入、未注册题材兜底、prompt 按题材加载。
+
+---
+
+## 演进记录
+
+每个 Agent 岗位说明书的评审 → 优化方向 → 落地状态，见 [AGENT_REVIEW.md](AGENT_REVIEW.md)（持续更新）。
 
 ---
 

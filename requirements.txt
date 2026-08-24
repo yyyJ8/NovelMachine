@@ -14,5 +14,9 @@ rich>=13.0.0
 tiktoken>=0.7.0
 pyyaml>=6.0
 
+# 测试
+pytest>=7.0
+pytest-cov>=4.0
+
 # 可选：本地 embedding 模型（默认走 SiliconFlow API，无需安装）
 # sentence-transformers>=2.7.0

@@ -62,7 +62,8 @@ def _write_sample_bible(bible_dir: Path):
     )
     (bible_dir / "xianxia" / "raw" / "03-术数阵法" / "周易-周-佚名.txt").write_text(
         "天行健，君子以自强不息。地势坤，君子以厚德载物。\n"
-        "易有太极，是生两仪。两仪生四象，四象生八卦。",
+        "易有太极，是生两仪。两仪生四象，四象生八卦。八卦定吉凶，吉凶生大业。"
+        "是故易有太极，太极生两仪，两仪生四象，四象生八卦。天地定位，山泽通气。",
         encoding="utf-8",
     )
 
@@ -97,7 +98,9 @@ def test_unregistered_genre_fallback(isolated_paths, fake_embedder):
     """未注册题材 → 全部落入 {genre}_general 兜底 collection"""
     (isolated_paths.bible_dir / "wuxia" / "raw").mkdir(parents=True)
     (isolated_paths.bible_dir / "wuxia" / "raw" / "某武侠资料.txt").write_text(
-        "江湖路远，快意恩仇。剑气纵横三万里，一剑光寒十九洲。",
+        "江湖路远，快意恩仇。剑气纵横三万里，一剑光寒十九洲。\n"
+        "少年仗剑走天涯，快马加鞭未下鞍。行侠仗义平生志，不负男儿七尺躯。"
+        "刀光剑影处，自有英雄泪。恩怨情仇里，方见赤子心。",
         encoding="utf-8",
     )
 

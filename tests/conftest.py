@@ -40,6 +40,7 @@ def isolated_paths(tmp_path, monkeypatch):
     config.bible_dir = tmp_path / "bible"
     (config.bible_dir / "xianxia" / "raw" / "01-道藏核心").mkdir(parents=True)
     (config.bible_dir / "xianxia" / "raw" / "02-神话仙传").mkdir(parents=True)
+    (config.bible_dir / "xianxia" / "raw" / "03-术数阵法").mkdir(parents=True)
     yield config
     config.chroma_persist_dir = old["chroma"]
     config.bm25_index_dir = old["bm25"]
