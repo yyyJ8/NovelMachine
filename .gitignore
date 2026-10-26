@@ -1,0 +1,21 @@
+# 环境与密钥
+.env
+.env.local
+
+# Python
+venv/
+__pycache__/
+*.pyc
+*.pyo
+.pytest_cache/
+
+# 索引产物（可重建）
+chroma_db/
+bm25_indexes/
+
+# 题材素材：资料自备，不入库（保留 _bible/README.md 占位）
+_bible/*/
+
+# 书稿：一本书一个目录，默认放 novels/。
+# 用 .env 的 BOOK_DIR 指到仓库外时，这里不需要改。
+novels/

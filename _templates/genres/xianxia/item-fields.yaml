@@ -1,0 +1,32 @@
+# 仙侠物品定义模板 — 字段规范
+# 法宝/丹药/草药/器物通用
+
+fields:
+  identity:
+    name: {string, 必选}
+    type: {法宝/丹药/草药/器物/材料/其他, 必选}
+    grade: {string}               # 品质/品级（天/地/玄/黄 或其他体系）
+    first_appearance: {string}
+
+  static:
+    origin:                       # 来历——它从哪里来
+      creator: {string}           # 谁造的/谁炼的/谁发现的（无则写"不明"）
+      creation_event: {string}    # 在什么情境下诞生（一场劫/一次炼制/一个意外）
+      history: {string}           # 在落到当前持有者手里之前经过了谁的手
+    capability:                   # 能力——它能做什么
+      primary: {string}           # 核心功能（一句话）
+      secondary: [{string}]       # 次要/隐藏功能
+    constraints:                  # 限制与代价——用了要付出什么 ★ 比功能更重要
+      usage_limit: {string}       # 能用几次/多久/什么条件下才能用
+      cost: {string}              # 使用代价（灵力/寿命/记忆/某种不可逆的失去）
+      side_effect: {string}       # 副作用
+      can_be_destroyed: {bool}    # 是否可被摧毁
+    source:
+      classical_ref: {string}     # 典籍出处（如有，WorldBuilder 补）
+      confidence: {确认/待确认/典籍未找到}
+
+  dynamic:
+    note: "以下字段在 novel_state.yaml 的 items 段追踪"
+    current_holder: {string}
+    status: {完好/受损/被封/已消耗/遗失}
+    location_if_lost: {string}    # 遗失时记录最后已知位置

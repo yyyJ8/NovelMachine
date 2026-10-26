@@ -1,0 +1,31 @@
+# 仙侠势力定义模板 — 字段规范
+# 宗门/教派/家族/王朝通用
+
+fields:
+  identity:
+    name: {string, 必选}
+    type: {宗门/教派/家族/王朝/散修组织/商会/其他}
+    alias: {string}               # 别称
+    headquarters: {string}        # 总部所在地
+    first_appearance: {string}
+
+  static:
+    ambition:                     # 它想要什么
+      goal: {string}              # 最终目标
+      current_priority: {string}  # 当前最紧急的目标
+    methodology:                  # 它怎么拿——行事风格
+      approach: {string}          # 公开/隐蔽/谈判/武力/渗透/收买
+      moral_boundary: {string}    # 有没有不能碰的底线
+    structure:
+      leader: {string}            # 最高掌控者
+      key_members: [{string}]     # 关键成员（不一定最强，但剧情关键）
+      size: {string}              # 规模（几人/几十人/几百人/几千人）
+    internal_tensions:            # 内部裂痕 ★ 剧情来源
+      factions: [{string}]        # 内部的派系分歧
+      instability: {string}       # 不稳定的点在哪
+
+  dynamic:
+    note: "以下字段在 novel_state.yaml 的 factions 段追踪"
+    current_state: {扩张中/稳定/收缩/内斗/已覆灭}
+    attitude_toward_protagonist: {string}  # 对主角的态度 + 变化轨迹
+    active_operations: [{string}]          # 当前正在进行的关键行动

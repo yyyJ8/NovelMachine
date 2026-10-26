@@ -1,0 +1,31 @@
+# 仙侠地点定义模板 — 字段规范
+# 洞府/秘境/古城/山脉/宗门/洞天通用
+
+fields:
+  identity:
+    name: {string, 必选}
+    type: {洞府/秘境/古城/山脉/宗门道场/洞天/禁地/战场遗迹/其他}
+    first_appearance: {string}
+
+  static:
+    past:                         # 这里发生过什么 ★ 最重要
+      original_purpose: {string}  # 最初是什么地方
+      key_event: {string}         # 改变它的关键事件（渡劫失败/飞升成功/大战/封印）
+      former_occupant: {string}   # 前主人/建造者
+    present_state:                # 现在是什么状态
+      condition: {废弃/活跃/封印中/半毁/隐藏}
+      danger_level: {string}      # 对进入者的威胁程度
+      residual_effects: [{string}] # 残留效果（灵力紊乱/幻象/禁制仍在运转/时间流速异常）
+    features:
+      notable_landmarks: [{string}]  # 显著地标
+      hidden_elements: [{string}]    # 隐藏的要素（密室/暗门/封印入口）
+    if_secret_realm:              # 仅秘境
+      test_dimension: {string}    # 考验主角的什么能力或品质
+      reward_type: {string}       # 通过考验后的奖励类型
+      previous_challengers: [{string}]  # 之前进去过的人（结局如何）
+
+  dynamic:
+    note: "以下字段在 novel_state.yaml 的 locations 段追踪"
+    current_status: {未探索/探索中/已通关/已封闭/已毁灭}
+    current_explorers: [{string}] # 谁在里面
+    discovery_chapter: {string}   # 第几章被发现

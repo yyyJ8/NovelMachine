@@ -1,0 +1,50 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "novel-rag"
+version = "0.1.0"
+description = "网文写作 RAG 知识库 —— 古典典籍检索 + 混合检索（ChromaDB + BM25）"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+keywords = ["rag", "novel", "chinese", "chromadb", "bm25"]
+dependencies = [
+    "chromadb>=0.5.0,<2.0.0",
+    "openai>=1.0.0,<3.0.0",
+    "jieba>=0.42",
+    "rank-bm25>=0.2.2",
+    "langchain-chroma>=0.2.0,<2.0.0",
+    "langchain-text-splitters>=0.3.0,<2.0.0",
+    "markdown>=3.7",
+    "PyPDF2>=3.0.0",
+    "pdfplumber>=0.11.0",
+    "beautifulsoup4>=4.12.0",
+    "python-dotenv>=1.0.0",
+    "pydantic>=2.0.0",
+    "rich>=13.0.0",
+    "tiktoken>=0.7.0",
+    "pyyaml>=6.0",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=7.0", "pytest-cov>=4.0"]
+# 可选：本地 embedding 模型（默认走 SiliconFlow API，无需安装）
+local-embedding = ["sentence-transformers>=2.7.0"]
+
+[project.scripts]
+rag-query = "rag_query:main"
+novel-cli = "cli:main"
+
+[tool.setuptools]
+py-modules = ["cli", "rag_query"]
+
+[tool.setuptools.packages.find]
+include = ["novel_rag*"]
+
+[tool.setuptools.package-data]
+novel_rag = ["prompts/*.txt"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

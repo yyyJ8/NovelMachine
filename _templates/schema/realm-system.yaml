@@ -1,0 +1,145 @@
+# -- 境界体系模板 v1.0 --
+
+meta:
+  last_updated: ""
+  description: ""
+
+# -- 境界划分 --
+# 下/中/上三重天是常见分法；如果只有一套线性境界，删掉分组直接列 realm 即可
+nine_realms:
+
+  lower_three:
+    - realm: 1
+      name_full: ""
+      name_short: ""             # 写作简称
+      heaven: ""
+      lifespan: ""
+      core_change: ""
+      breakthrough_condition: ""
+      combat_traits: ""          # AI 写战斗场景用
+      sub_stages: []
+
+    - realm: 2
+      name_full: ""
+      name_short: ""
+      heaven: ""
+      lifespan: ""
+      core_change: ""
+      breakthrough_condition: ""
+      combat_traits: ""
+      sub_stages: []
+
+    - realm: 3
+      name_full: ""
+      name_short: ""
+      heaven: ""
+      lifespan: ""
+      core_change: ""
+      breakthrough_condition: ""
+      combat_traits: ""
+      sub_stages: []
+
+  middle_three:
+    - realm: 4
+      name_full: ""
+      name_short: ""
+      heaven: ""
+      lifespan: ""
+      core_change: ""
+      breakthrough_condition: ""
+      combat_traits: ""
+      sub_stages: []
+
+    - realm: 5
+      name_full: ""
+      name_short: ""
+      heaven: ""
+      lifespan: ""
+      core_change: ""
+      breakthrough_condition: ""
+      combat_traits: ""
+      sub_stages: []
+
+    - realm: 6
+      name_full: ""
+      name_short: ""
+      heaven: ""
+      lifespan: ""
+      core_change: ""
+      breakthrough_condition: ""
+      combat_traits: ""
+      sub_stages: []
+
+  upper_three:
+    - realm: 7
+      name_full: ""
+      name_short: ""
+      heaven: ""
+      lifespan: ""
+      core_change: ""
+      breakthrough_condition: ""
+      combat_traits: ""
+      sub_stages: []
+
+    - realm: 8
+      name_full: ""
+      name_short: ""
+      heaven: ""
+      lifespan: ""
+      core_change: ""
+      breakthrough_condition: ""
+      combat_traits: ""
+      sub_stages: []
+
+    - realm: 9
+      name_full: ""
+      name_short: ""
+      heaven: ""
+      lifespan: ""
+      core_change: ""
+      breakthrough_condition: ""
+      combat_traits: ""
+      sub_stages: []
+
+# -- 简称映射 --
+# 代码扫描章纲时用简称匹配对应境界
+realm_aliases: {}
+  # 筑基: "炼己筑基"
+
+# -- 金手指 --
+# 没有金手指设定的小说删掉此节
+golden_finger:
+  name: ""
+  type: ""                       # 星辰类 | 血脉类 | 转世类 | 器物类 | 系统类
+  origin: ""
+  description: ""
+  stages:
+    - stage: 1
+      name: ""
+      trigger: ""
+      abilities: []
+      cost: ""
+
+# -- 特殊体质 --
+# 全局体质目录。每个体质的定义（名称/等级/能力）在这里，是权威来源。
+# 哪个角色持有哪种体质、是否觉醒，在 character-schema.yaml 的 physique 字段填写。
+physique_system:
+  ranks:
+    - name: ""                   # 道体 | 战体 | 灵体
+      description: ""
+  list:
+    - name: ""
+      rank: ""
+      description: ""
+      abilities: []
+
+# -- 世界规则 --
+# world_rules 定义在 world-structure.yaml，此处仅引用不重复定义
+# 本书如有"境界晋升受世界规则制约"的特殊逻辑，在此处说明
+world_rules_ref: see world-structure.yaml
+
+# -- 分卷境界 --
+volume_realm_map:
+  卷一: ""
+  卷二: ""
+  # 按实际卷数增减

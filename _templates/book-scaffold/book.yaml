@@ -1,0 +1,11 @@
+# 一本书的自描述文件。
+# 目录名建议用英文 key；中文书名写在这里。
+key: mybook
+title: 书名
+genre: xianxia            # 题材，对应 config/genres.yaml 的 key
+platform: ""              # 番茄 / 七猫 / 起点 …
+status: planning          # planning | writing | completed | paused | archived
+current_volume: vol_01
+current_chapter: 0        # 已定稿到第几章（0 = 还没写）
+updated: 2026-01-01
+one_liner: ""             # 一句话简介

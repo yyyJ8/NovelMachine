@@ -1,0 +1,19 @@
+# -- 阵法模板 v1.0 --
+
+meta:
+  last_updated: ""
+  description: ""
+
+formations:
+  - name: ""
+    type: ""                   # 攻击 | 防御 | 困敌 | 传送 | 聚灵 | 封印 | 幻阵
+    rank: ""                   # 凡阵 | 灵阵 | 宝阵 | 道阵 | 仙阵 | 太古阵
+    scale: ""                  # 单人 | 小队 | 宗门级 | 天地级
+    deployed_by: ""            # 布阵者/所属宗门，指向 sect-config
+    known_by: []               # 掌握此阵的角色，指向 character-schema
+    location: ""               # 布阵位置
+    core: ""                   # 阵眼/核心材料，指向 items.yaml
+    effect: ""
+    weakness: ""               # 破解方法
+    status: ""                 # 完好 | 削弱 | 失效 | 已破
+    first_appeared: 0

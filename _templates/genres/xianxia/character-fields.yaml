@@ -1,0 +1,45 @@
+# 仙侠角色定义模板 — 字段规范
+# 使用：开新角色时按级别选择字段，最小级别只填必选。
+
+fields:
+  identity:
+    name: {string, 必选}
+    aliases: [{string}]           # 曾用名/称号
+    role: {S核心/A重要/B提及}    # 追踪级别
+    first_appearance: {string}   # 第几章首次出场
+
+  static:                         # 静态定义（写完基本不改）
+    appearance:                   # 外貌——不是形容词堆砌，是"第一眼会注意到的特征"
+      primary: {string}           # 最显眼的特征（如"左眼下方有一道旧剑痕"）
+      secondary: [{string}]       # 次要特征
+    background:                   # 来历
+      origin: {string}            # 出身、师承、怎么走到今天这个位置的
+      defining_event: {string}    # 塑造她性格的关键事件（一件事）
+    personality:                   # 性格——不是在平时什么样，是在压力下会选择什么
+      core_drive: {string}        # 最想要的东西
+      under_pressure: {string}    # 压力下的行为模式（逃/战/谈判/沉默）
+      flaw: {string}              # 致命弱点
+      speech_style: {string}      # 说话方式（用词偏好/句式/口头禅/语速）
+    function:                     # 为什么存在
+      narrative_role: {string}    # 对主线的作用（盟友/对手/导师/镜子/工具人）
+      arc: {string}               # 她的成长线（一句话）
+
+    # S/A 级额外字段
+    cultivation:                  # 仅修仙角色
+      realm: {string}
+      technique_focus: {string}   # 功法方向（剑/丹/阵/符/体）
+      breakthrough_history: [{string}]  # 突破记录
+
+    # S 级额外字段
+    secrets: [{string}]           # 她藏着什么
+    can_die: {bool}               # 是否可以死亡（影响 Reader 的情绪投入）
+
+  dynamic:                        # 动态追踪（存在 novel_state.yaml 而非此处）
+    note: "以下字段不在本文件填写，仅定义结构，实际数据在 novel_state.yaml 的 characters 段"
+    current_location: {string}
+    emotional_state: {string}
+    physical_state: {string}      # 健康/受伤/中毒/濒死
+    active_goals: [{string}]      # 当前正在积极做的事
+    relationships:                # 与主角的关系变化轨迹
+      current_attitude: {string}
+      trajectory: [{string}]      # 关系变化轨迹，按时间顺序
