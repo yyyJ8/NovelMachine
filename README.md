@@ -16,24 +16,18 @@
 ## 快速开始
 
 ```bash
-# 1. 环境
-python -m venv venv
-source venv/bin/activate            # Windows: venv\Scripts\activate
+# 安装
+python -m venv venv && source venv/bin/activate   # Windows: venv\Scripts\activate
 pip install -e ".[dev]"
+cp .env.example .env                              # 填 SILICONFLOW_API_KEY
 
-# 2. 配置：把 .env.example 复制成 .env，填入 SILICONFLOW_API_KEY（embedding 用）
-
-# 3. 检索：资料放进 _bible/{题材}/raw/ → 摄入 → 查询
-python cli.py ingest --genre xianxia
+# 检索
+python cli.py ingest --genre xianxia              # 429 时加 --batch-size 16 --batch-delay 1
 python rag_query.py "关键词" --search-only --top-k 5
 
-# 4. 写作：复制书目录脚手架，把 .env 的 BOOK_DIR 指过去，
-#    然后在 AI 会话里用 _agents/orchestrator.md 启动主编
-cp -r _templates/book-scaffold ~/novels/mybook
+# 写作
+cp -r _templates/book-scaffold ~/novels/mybook    # 再把 .env 的 BOOK_DIR 指过去
 ```
-
-> 429 限流时加 `--batch-size 16 --batch-delay 1`。
-> 题材归类改 `config/genres.yaml`，不配也能跑（资料落入 `{题材}_general`）。
 
 ---
 
