@@ -32,13 +32,25 @@ class Embedder:
         self.base_url = base_url or config.base_url
         self.model = model or config.embedding_model
 
-        # 使用 OpenAI 兼容客户端
-        self._client = OpenAI(
-            api_key=self.api_key,
-            base_url=self.base_url,
-            timeout=60.0,
-            max_retries=0,  # 我们自己控制重试
-        )
+        # 客户端延迟创建：没有 API Key 时也能 import（CI / 只跑测试 / 只用 BM25）
+        self._client: OpenAI | None = None
+
+    @property
+    def client(self) -> OpenAI:
+        """首次真正调用时才建客户端；缺 Key 时在这里报错，而不是 import 时"""
+        if self._client is None:
+            if not self.api_key:
+                raise RuntimeError(
+                    "未配置 SILICONFLOW_API_KEY —— 请在 .env 里填入你的 API Key"
+                    "（只跑测试或只用 BM25 检索时可以不配）"
+                )
+            self._client = OpenAI(
+                api_key=self.api_key,
+                base_url=self.base_url,
+                timeout=60.0,
+                max_retries=0,  # 我们自己控制重试
+            )
+        return self._client
 
     def embed_query(self, text: str) -> list[float]:
         """单条查询 embedding"""
@@ -142,7 +154,7 @@ class Embedder:
 
     def _create_embeddings(self, texts: list[str]) -> list[list[float]]:
         """单次 API 调用 + 按输入顺序排列"""
-        response = self._client.embeddings.create(
+        response = self.client.embeddings.create(
             model=self.model,
             input=texts,
         )
