@@ -16,32 +16,24 @@
 ## 快速开始
 
 ```bash
-# 1. 装环境
+# 1. 环境
 python -m venv venv
-venv/Scripts/activate          # Windows；macOS/Linux: source venv/bin/activate
+source venv/bin/activate            # Windows: venv\Scripts\activate
 pip install -e ".[dev]"
 
-# 2. 配 .env（填入你自己的 API Key）
-# SILICONFLOW_API_KEY=sk-your-key      # embedding 用
-# LLM_API_KEY=sk-your-key              # 生成回答用（可选，回落前者）
+# 2. 配置：把 .env.example 复制成 .env，填入 SILICONFLOW_API_KEY（embedding 用）
 
-# 3. 放资料：把自己要检索的资料放进 _bible/{题材}/raw/
-#    （摄入会递归扫描整个 _bible/{题材}/，raw/ 是约定放置位置，其余位置请勿放 .md/.txt/.pdf）
-#    （可选）在 config/genres.yaml 里加归类规则；不配置也能跑，资料落入 {题材}_general
-
-# 4. 摄入（429 限流时加 --batch-size 16 --batch-delay 1）
+# 3. 检索：资料放进 _bible/{题材}/raw/ → 摄入 → 查询
 python cli.py ingest --genre xianxia
-
-# 5. 查询（Agent 用 --search-only 输出 JSON）
 python rag_query.py "关键词" --search-only --top-k 5
 
-# 6. 写作：把 _agents/ + _templates/ 放进你的 AI 会话项目
-#    （Claude/DeepSeek 等），让主编 Agent 调度写作循环
-
-# 7. 建书目录（一本书 = 一个自包含目录，放在仓库外也可以）
+# 4. 写作：复制书目录脚手架，把 .env 的 BOOK_DIR 指过去，
+#    然后在 AI 会话里用 _agents/orchestrator.md 启动主编
 cp -r _templates/book-scaffold ~/novels/mybook
-# 然后把 .env 的 BOOK_DIR 指到它：BOOK_DIR=/home/you/novels/mybook
 ```
+
+> 429 限流时加 `--batch-size 16 --batch-delay 1`。
+> 题材归类改 `config/genres.yaml`，不配也能跑（资料落入 `{题材}_general`）。
 
 ---
 
@@ -177,19 +169,6 @@ pytest                          # 网络受限时: python tests/manual_smoke.py
 ```
 
 覆盖：题材归类规则、摄入→检索端到端、增量摄入、未注册题材兜底、prompt 按题材加载。
-
----
-
-## 开发阶段
-
-| 阶段 | 内容 | 状态 |
-|------|------|------|
-| Phase 0 | RAG 基础（双路检索 + CLI） | ✅ |
-| Phase 1 | Agent 岗位说明书 + 设定体系 | ✅ |
-| Phase 2 | 三层规划（大纲→卷纲→章纲）+ novel_state | ✅ |
-| Phase 3 | 写作闭环 MVP（单章循环跑通） | ✅ |
-| Phase 4 | 多章连续性（10 章连写 + 伏笔提醒） | 🔄 进行中 |
-| Phase 5 | 读者反馈、多题材扩展（武侠/历史/科幻） | ⬜ 规划 |
 
 ---
 
